@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+[![Screen Preview](./preview1.png)](./preview1.png)
+
+[![Screen Preview](./preview2.png)](./preview2.png)
+
+[![Screen Preview](./preview3.png)](./preview3.png)
+
+[![Screen Preview](./preview4.png)](./preview4.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
