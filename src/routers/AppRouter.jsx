@@ -16,7 +16,7 @@ import PublicRoute from './PublicRoute';
 export default function AppRouter() {
     return (
         <Routes>
-            <Route element={<PrivateRoutes />}>
+            <Route path='/' element={<PrivateRoutes />} >
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/inicio" element={<HomeContent />} />
                 <Route path="/acerca-de" element={<AboutContent />} />
@@ -29,6 +29,7 @@ export default function AppRouter() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
             </Route>
+            {/* <Navigate to="/login" /> */}
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );

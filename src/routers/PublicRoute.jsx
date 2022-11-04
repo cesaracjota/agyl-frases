@@ -7,13 +7,12 @@ const PublicRoute = () => {
     // const user = window.localStorage.getItem('user');
 
     const { user } = useSelector(state => state.auth);
-    const { ROLE } = useSelector(state => state.auth);
 
     const location = useLocation();
 
     return(
 
-        user ? <Navigate to={ROLE === 'ADMIN_ROLE' ? '/inicio' : '/acerca-de'} state={{ from: location }} replace /> : <Outlet />
+        user ? <Navigate to={ user?.usuario?.role === "ADMIN_ROLE" ? '/inicio' : '/acerca-de'} state={{ from: location }} replace /> : <Outlet />
     
     )
 }

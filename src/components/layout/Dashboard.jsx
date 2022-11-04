@@ -16,7 +16,7 @@ const Dashboard = ({ componente: Component }) => {
 
                 <Topnav isOpen={sidebar.isOpen} onClose={sidebar.onClose} onOpen={sidebar.onOpen} />
 
-                <Box mt={"100px"} ml={{ base: 0, lg: 60 }} transition=".1s ease">
+                <Box mt={"105px"} ml={{ base: 0, lg: 60 }} transition=".1s ease">
                     {/* Contenido */}
                     <Container maxW="container.4xl">
                         { Component }

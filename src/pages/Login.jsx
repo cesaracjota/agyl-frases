@@ -12,7 +12,6 @@ import {
     Stack,
     Text,
     VStack,
-    useToast,
     useColorModeValue,
     Switch,
     HStack,
@@ -20,6 +19,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
+import { ToastChakra } from '../helpers/toast';
 
 const LoginPage = () => {
 
@@ -28,26 +28,19 @@ const LoginPage = () => {
     const { ROLE, isLoading, isError, isSuccess, message } = useSelector(state => state.auth);
 
     const navigate = useNavigate();
-    const toast = useToast();
     const dispatch = useDispatch();
 
     const bgCardColor = useColorModeValue('gray.50', 'gray.900');
 
     useEffect(() => {
+
         if (isError) {
-            toast({
-                title: 'Error',
-                description: message,
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-                position: 'top-right',
-                variant: 'top-accent',
-            });
+            ToastChakra('Error', message, 'error', 1500, 'top-right');
         }
 
         dispatch(reset());
-    }, [dispatch, isError, isSuccess, message, navigate, toast, ROLE]);
+
+    }, [dispatch, isError, isSuccess, message, navigate, ROLE]);
 
     const handleLogin = () => {
         try {
@@ -57,15 +50,7 @@ const LoginPage = () => {
             };
             dispatch(login(userData));
         } catch (err) {
-            toast({
-                title: 'Error de conexión',
-                description: err,
-                status: 'error',
-                position: 'top-right',
-                variant: 'top-accent',
-                duration: 3000,
-                isClosable: true,
-            });
+            ToastChakra('Error', err.message, 'error', 3000);
         }
     };
 

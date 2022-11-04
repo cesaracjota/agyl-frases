@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ToastChakra } from "../helpers/toast";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -24,7 +25,10 @@ const createCategory = async (categoryData, token) => {
         }
     }
     const response = await axios.post(`${API_URL}/categorias`, categoryData, config);
-    return response.data;
+    if (response.status === 201 || response.status === 200) {
+        ToastChakra('CATEGORIA CREADA', 'La categoria se ha creado correctamente', 'success', 1500, 'bottom');
+        return response.data;
+    }
 }
 
 // Update category
@@ -37,6 +41,9 @@ const updateCategory = async (categoryData, token) => {
         }
     }
     const response = await axios.put(`${API_URL}/categorias/${categoryData._id}`, categoryData, config);
+    if (response.status === 200 || response.status === 201) {
+        ToastChakra('CATEGORIA MODIFICADA', 'La categoria ha sido modificada correctamente', 'success', 1500, 'bottom');
+    }
     return response.data;
 }
 
@@ -50,7 +57,10 @@ const deleteCategory = async (id, token) => {
         }
     };
     const response = await axios.delete(`${API_URL}/categorias/${id}`, config);
-    return response.data;
+    if (response.status === 200 || response.status === 201) {
+        ToastChakra('CATEGORIA ELIMINADA', 'La categoria se ha eliminado correctamente', 'success', 1500, 'bottom');
+        return response.data;
+    }
 }
 
 const categoryService = {

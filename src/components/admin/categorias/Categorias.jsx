@@ -9,10 +9,12 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCategories, deleteCategory, reset } from '../../../features/categorias/categoriaSlice';
+import { getCategories, reset } from '../../../features/categorias/categoriaSlice';
 import ModalAgregarCategoria from './ModalAgregarCategoria';
 import ModalEditarCategoria from './ModalEditarCategoria';
 import ModalDetallesCategoria from './ModalDetallesCategoria';
+import { ToastChakra } from '../../../helpers/toast';
+import { AlertEliminar } from './AlertEliminar';
 
 const Categorias = () => {
 
@@ -26,6 +28,7 @@ const Categorias = () => {
 
     useEffect(() => {
         if(isError) {
+            ToastChakra('Error', message, 'error', 3000);
             console.log(message);
         }
 
@@ -40,12 +43,6 @@ const Categorias = () => {
         }
 
     }, [user, navigate, isError, message, dispatch]);
-
-    const handleDelete = (id) => {
-        if(window.confirm('¿Está seguro de eliminar esta categoría?')) {
-            dispatch(deleteCategory(id));
-        }
-    }
 
     const columns = [
         {
@@ -114,16 +111,7 @@ const Categorias = () => {
             cell : row => (
                 <div>
                     <ModalEditarCategoria row={row} />
-                    <IconButton
-                        aria-label="Eliminar"
-                        onClick={() => handleDelete(row?._id)}
-                        icon={<Icon as={MdDelete} />}
-                        fontSize="2xl"
-                        colorScheme="red"
-                        color="white"
-                        _dark={{ bg: "red.600", color: "white", _hover: { bg: "red.800" }}}
-                        ml={3}
-                    />
+                    <AlertEliminar row={row} />
                 </div>
             )
         }

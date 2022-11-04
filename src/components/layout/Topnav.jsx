@@ -43,8 +43,10 @@ const Topnav = (props) => {
 
     const handleLogout = () => {
         dispatch(logout());
-        dispatch(reset());
-        navigate('/login');
+        setTimeout(() => {
+            navigate('/login');
+            dispatch(reset());
+        }, 2000);
     }
 
     return (
@@ -100,12 +102,14 @@ const Topnav = (props) => {
                                     alignItems="center"
                                     justifyContent="space-between"
                                     w="full"
-                                    py={{ base: "8px", md: "8px", lg: "6px" }}
+                                    py={{ base: "7px", md: "8px", lg: "6px" }}
                                     px={{ base: 0, md: 0, lg: 2 }}
-                                    rounded={{ base: "md", lg: "md" }}
+                                    rounded="md"
                                     cursor="pointer"
-                                    bg={useColorModeValue('#edf2f7', '#FFFFFF14') }
-                                    borderWidth={{ base: "none", lg: "1px"}}
+                                    // bg={useColorModeValue('#edf2f7', '#FFFFFF14') }
+                                    // borderWidth={{ base: "none", lg: "1px"}}
+                                    boxShadow={{ base: "none", lg: "base" }}
+                                    _dark={{ borderWidth: "1px", rounded: 'md', bg: '#FFFFFF14' }}
                                 >
                                     <VStack
                                         display={{ base: 'none', lg: 'flex' }}
