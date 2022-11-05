@@ -46,14 +46,6 @@ const Categorias = () => {
 
     const columns = [
         {
-            cell : row => (
-                <div>
-                    <ModalDetallesCategoria categoria={row} />
-                </div>
-            ),
-            width: '60px',
-        },
-        {
             name: 'ID',
             selector: row => row._id,
             sortable: true,
@@ -110,6 +102,7 @@ const Categorias = () => {
             center: true,
             cell : row => (
                 <div>
+                    <ModalDetallesCategoria categoria={row}/>
                     <ModalEditarCategoria row={row} />
                     <AlertEliminar row={row} />
                 </div>
@@ -151,32 +144,31 @@ const Categorias = () => {
     return (
         <>
             <Box
-                borderWidth="1px"
                 borderRadius="md"
+                boxShadow="base"
                 overflow="hidden"
                 bg="white"
-                _dark={{ bg: "#131516" }}
-                >
+                _dark={{ bg: "primary.800" }}
+            >
                     <Stack spacing={4} direction="row" justifyContent="space-between" p={4}>
                         <HStack spacing={4} direction="row">
                             <ModalAgregarCategoria />
-                            <IconButton colorScheme="red" _dark={{ bg: "red.600", color: "white" }} aria-label='Eliminar' icon={<Icon as={MdDelete} fontSize="2xl" />} variant="solid" />
+                            <IconButton colorScheme="red" _dark={{ bg: "red.600", color: "white", _hover: { bg: "red.700" }}} aria-label='Eliminar' icon={<Icon as={MdDelete} fontSize="2xl" />} variant="solid" rounded="full" />
                         </HStack>
                         <HStack spacing={4} direction="row">
-                            <IconButton colorScheme="whatsapp" _dark={{ bg: "whatsapp.600", color: "white" }} aria-label='Filters' icon={<Icon as={MdFilterList} fontSize="2xl" />} variant="ghost" rounded="full" />
-                            <IconButton colorScheme="messenger" _dark={{ bg: "messenger.600", color: "white" }} aria-label='Exports' icon={<Icon as={CgExport} fontSize="xl" />} variant="ghost" rounded="full" />
+                            <IconButton colorScheme="whatsapp" _dark={{ bg: "whatsapp.600", color: "white", _hover: { bg: "whatsapp.700" } }} aria-label='Filters' icon={<Icon as={MdFilterList} fontSize="2xl" />} variant="ghost" rounded="full" />
+                            <IconButton colorScheme="messenger" _dark={{ bg: "messenger.600", color: "white", _hover: { bg: "messenger.700" }}} aria-label='Exports' icon={<Icon as={CgExport} fontSize="xl" />} variant="ghost" rounded="full" />
                         </HStack>
                     </Stack>
-                </Box>
+            </Box>
             <Box
-                borderWidth="1px"
-                borderRadius="lg"
+                borderRadius="md"
                 overflow="hidden"
-                boxShadow={'sm'}
+                boxShadow={'base'}
                 bg="white"
-                _dark={{ bg: "#131516" }}
+                _dark={{ bg: "primary.800" }}
                 mt={2}
-                pt={6}
+                pt={2}
                 >
                     <DataTableExtensions
                         {...tableData} 
@@ -207,11 +199,11 @@ const Categorias = () => {
                             theme={themeTable}
                             pointerOnHover={true}
                             responsive={true}
-                            // selectableRows={true}
                             noDataComponent={<Text mb={4} fontSize="lg">NO DATA FOUND</Text>}
                         />
                     </DataTableExtensions>
             </Box>
+            &nbsp;
         </>
     )
 }

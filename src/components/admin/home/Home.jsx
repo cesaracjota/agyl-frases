@@ -185,43 +185,41 @@ const Home = () => {
   }
 
   return (
-    <>
-      <Flex
-        w="full"
-        alignItems="center"
-        justifyContent="center"
-        mb={4}
-      >
+    <Flex
+      w="full"
+      alignItems="center"
+      justifyContent="center"
+      mb={4}
+    >
+      <Stack spacing={4} w="full" direction={'column'}>
+        <Box mx="auto" rounded="md" shadow="base" bgGradient='linear-gradient(270deg,#d41459,#911a6c)' color="white" w="full" py={4} px={4}>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Stack spacing={2} w="full" direction={'row'} alignItems="center">
+              <Box minW={"60px"} mr={4} rounded={'lg'} bg={'white'} textAlign="center">
+                <Image src={'https://img.icons8.com/ios-filled/512/v-live.png'} w={"60px"} alt="logo Agyl" />
+              </Box>
+              <VStack textAlign="left" align="left">
+                <Text fontWeight="bold" fontSize="lg">Welcome to Agyl - API</Text>
+                <Text color="gray.100" display={['none', 'none', 'block', 'block']}>{frases?.contenido ? frases?.contenido : 'no found data'}</Text>
+              </VStack>
+            </Stack>
+            <Button py={5} ml={4} px={6} border="1px" borderColor="white" _hover={{ bg: "gray.50", color: "gray.900" }}  variant="outline" rounded="full" size="sm" color="white">Get Started</Button>
+          </Flex>
+        </Box>
         <Stack spacing={4} w="full" direction={'column'}>
-          <Box mx="auto" rounded="md" shadow="base" bgGradient='linear-gradient(270deg,#d41459,#911a6c)' color="white" w="full" py={4} px={4}>
-            <Flex justifyContent="space-between" alignItems="center">
-              <Stack spacing={2} w="full" direction={'row'} alignItems="center">
-                <Box minW={"60px"} mr={4} rounded={'lg'} bg={'white'} textAlign="center">
-                  <Image src={'https://img.icons8.com/ios-filled/512/v-live.png'} w={"60px"} alt="logo Agyl" />
-                </Box>
-                <VStack textAlign="left" align="left">
-                  <Text fontWeight="bold" fontSize="lg">Welcome to Agyl - API</Text>
-                  <Text color="gray.100" display={['none', 'none', 'block', 'block']}>{frases?.contenido ? frases?.contenido : 'no found data'}</Text>
-                </VStack>
-              </Stack>
-              <Button py={5} ml={4} px={6} border="1px" borderColor="white" _hover={{ bg: "gray.50", color: "gray.900" }}  variant="outline" rounded="full" size="sm" color="white">Get Started</Button>
-            </Flex>
+          <Box mx="auto" rounded="md" borderWidth="1px" w="full" py={4} px={4}>
+            <SimpleGrid mx="auto" columns={[1, 1, 1, 1, 2]} spacing={4} w="full" direction={'column'}>
+              <PieChart
+                highcharts={Highcharts}
+                options={options}
+              // constructorType={'stockChart'}
+              />
+              <LineChart options={options2} highcharts={Highcharts} />
+            </SimpleGrid>
           </Box>
-          <Stack spacing={4} w="full" direction={'column'}>
-            <Box mx="auto" rounded="md" borderWidth="1px" w="full" py={4} px={4}>
-              <SimpleGrid mx="auto" columns={[1, 1, 1, 1, 2]} spacing={4} w="full" direction={'column'}>
-                <PieChart
-                  highcharts={Highcharts}
-                  options={options}
-                // constructorType={'stockChart'}
-                />
-                <LineChart options={options2} highcharts={Highcharts} />
-              </SimpleGrid>
-            </Box>
-          </Stack>
         </Stack>
-      </Flex>
-    </>
+      </Stack>
+    </Flex>
   )
 }
 

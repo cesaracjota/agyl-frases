@@ -14,11 +14,12 @@ import {
     Badge,
 } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
+import Moment from 'moment';
 
 const ModalDetallesCategoria = ({ categoria }) => {
 
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-    const btnRef = useRef()
+    const btnRef = useRef();
 
     const handleOpenDrawer = () => {
         setIsOpenDrawer(true);
@@ -46,8 +47,8 @@ const ModalDetallesCategoria = ({ categoria }) => {
                 size="xl"
             >
                 <DrawerOverlay />
-                <DrawerContent _dark={{ bg: "#1b1d1e" }}>
-                    <DrawerHeader fontWeight="bold" bg="purple.600" color="gray.200" textAlign="center">INFORMACIÓN BASICA DE LA CATEGORÍA SELECCIONADA</DrawerHeader>
+                <DrawerContent _dark={{ bg: "primary.1000" }}>
+                    <DrawerHeader fontWeight="bold" bg="blue.600" color="gray.200" textAlign="center">INFORMACIÓN BASICA DE LA CATEGORÍA SELECCIONADA</DrawerHeader>
                     <DrawerBody>
                         <Stack direction="column" mt={6} px={[0, 10, 40, 60]}>
                             <Stack spacing={4} direction={{base : "column", lg: "row"}} justifyContent="space-between">
@@ -80,18 +81,18 @@ const ModalDetallesCategoria = ({ categoria }) => {
                             <Divider />
                             <Stack spacing={4} direction={{base : "column", lg: "row"}} justifyContent="space-between">
                                 <Text fontWeight="bold">FECHA CREADA:</Text>
-                                <Text>{ categoria?.createdAt }</Text>
+                                <Text>{ Moment(categoria?.createdAt).format('DD/MM/YYYY - hh:mm:ss A') }</Text>
                             </Stack>
                             <Divider />
                             <Stack spacing={4} direction={{base : "column", lg: "row"}} justifyContent="space-between">
                                 <Text fontWeight="bold">FECHA ACTUALIZADA:</Text>
-                                <Text>{ categoria?.updatedAt }</Text>
+                                <Text>{ Moment(categoria?.updatedAt).format('DD/MM/YYYY - hh:mm:ss A') }</Text>
                             </Stack>
                         </Stack>
                     </DrawerBody>
 
                     <DrawerFooter w="full" justifyContent="center" textAlign="center" alignItems="center" display="flex">
-                        <Button colorScheme="purple" _dark={{ bg: "purple.600", color: "white", _hover: { bg: "purple.800" } }} size="lg" onClick={handleCloseDrawer}>
+                        <Button colorScheme="blue" _dark={{ bg: "blue.600", color: "white", _hover: { bg: "blue.700" } }} size="lg" onClick={handleCloseDrawer}>
                             OK
                         </Button>
                     </DrawerFooter>

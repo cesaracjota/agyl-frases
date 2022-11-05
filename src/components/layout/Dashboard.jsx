@@ -9,25 +9,26 @@ const Dashboard = ({ componente: Component }) => {
     const sidebar = useDisclosure();
 
     return (
-        <>
-            <Box as="section" bg="gray.50" _dark={{ bg: "#181a1b" }} minH="100vh">
+        <Box 
+            as="section" 
+            bg="gray.50" 
+            _dark={{ bg: "#111617" }} 
+            minH="100vh"
+        >
+            <SidebarContent onClose={sidebar.onClose} display={{ base: "none", lg: "unset" }} />
 
-                <SidebarContent onClose={sidebar.onClose} display={{ base: "none", lg: "unset" }} />
+            <Topnav isOpen={sidebar.isOpen} onClose={sidebar.onClose} onOpen={sidebar.onOpen} />
 
-                <Topnav isOpen={sidebar.isOpen} onClose={sidebar.onClose} onOpen={sidebar.onOpen} />
-
-                <Box mt={"105px"} ml={{ base: 0, lg: 60 }} transition=".1s ease">
-                    {/* Contenido */}
-                    <Container maxW="container.4xl">
-                        { Component }
-                    </Container>
-                    {/* footer */}
-                    {/* don't necesary use footer component, it's depend your chose */}
-                    {/* <Divider  mt={4}/> */}
-                    {/* <Footer/> */}
-                </Box>
+            <Box mt={"90px"} ml={{ base: 0, lg: 60 }} transition=".1s ease">
+                <Container maxW="container.4xl">
+                    { Component }
+                </Container>
+                {/* footer */}
+                {/* don't necesary use footer component, it's depend your chose */}
+                {/* <Divider  mt={4}/> */}
+                {/* <Footer/> */}
             </Box>
-        </>
+        </Box>
     )
 }
 

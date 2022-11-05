@@ -44,7 +44,7 @@ export const AlertEliminar = ({ row }) => {
                 colorScheme="red"
                 color="white"
                 _dark={{ bg: "red.600", color: "white", _hover: { bg: "red.800" }}}
-                ml={3}
+                ml={2}
             />
             <AlertDialog
                 motionPreset='slideInBottom'
@@ -59,7 +59,7 @@ export const AlertEliminar = ({ row }) => {
                     backdropBlur='4px'
                 />
 
-                <AlertDialogContent py={6}>
+                <AlertDialogContent py={6} _dark={{ bg: "primary.900"}}>
                     <Flex textAlign="center" justifyContent="center" p={2}>
                         <Icon as={AiOutlineAlert} fontSize="9xl" color="red.500" />
                     </Flex>

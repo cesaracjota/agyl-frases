@@ -36,17 +36,18 @@ const ModalEditarCategoria = ({ row }) => {
     return (
         <>
             <IconButton 
-                colorScheme="purple" 
-                _dark={{ bg: "purple.600", color: "white", _hover: { bg: "purple.800" }}}
+                colorScheme="green" 
+                _dark={{ bg: "green.600", color: "white", _hover: { bg: "green.800" }}}
                 aria-label="Editar" 
                 icon={<Icon as={VscEdit} 
                 fontSize="2xl" />} 
                 variant="solid"
                 onClick={() => handleModalOpen(row)}
+                ml={2}
             />
             <Modal isOpen={isModalOpen} onClose={handleModalClose} size="4xl">
                 <ModalOverlay/>
-                    <ModalContent _dark={{ bg: "#1b1d1e" }}>
+                    <ModalContent _dark={{ bg: "primary.modal" }}>
                         <ModalHeader textAlign="center">UPDATE CATEGORY</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
@@ -87,10 +88,10 @@ const ModalEditarCategoria = ({ row }) => {
                             </Stack>
                         </ModalBody>
                         <ModalFooter>
-                            <Button colorScheme="gray" size="lg" mr={3} onClick={handleModalClose} variant="outline">
+                            <Button colorScheme="red" _dark={{ bg: "red.500", color: "white", _hover: { bg: "red.600" }}} size="lg" mr={3} onClick={handleModalClose}>
                                 CANCEL
                             </Button>
-                            <Button colorScheme="purple" _dark={{ bg: "purple.600", color: "white", _hover: { bg: "purple.800" }}} size="lg" mr={3} onClick={handleUpdate}>
+                            <Button colorScheme="green" _dark={{ bg: "green.600", color: "white", _hover: { bg: "green.800" }}} size="lg" mr={3} onClick={handleUpdate}>
                                 UPDATE
                             </Button>
                         </ModalFooter>

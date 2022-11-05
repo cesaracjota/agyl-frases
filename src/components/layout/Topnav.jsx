@@ -60,12 +60,12 @@ const Topnav = (props) => {
                     align="center"
                     justify="space-between"
                     w="full"
-                    px="6"
-                    _dark={{ bg: "#181a1b" }}
-                    borderBottomWidth="1px"
+                    px="4"
                     color="inherit"
                     py={4}
                     bg="white"
+                    _dark={{ bg: "#121a21", boxShadow:"0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06)" }}
+                    boxShadow="0 3px 6px -1px rgba(0,0,0,.1)"
                 >
                     <Drawer
                         isOpen={props.isOpen}
@@ -85,34 +85,30 @@ const Topnav = (props) => {
                         ml={-2}
                         variant="ghost"
                         icon={<RiMenu4Fill />}
-                        size="lg"
+                        size="md"
                     />
                     <Flex alignSelf="center" verticalAlign={'center'} justify={'flex-end'} w={'full'} display="inline-flex">
                         <IconButton
-                            size="lg"
+                            size="md"
                             aria-label={'Notificaciones'}
                             marginLeft="2"
-                            fontSize="2xl"
+                            fontSize="xl"
+                            variant={'ghost'}
+                            rounded={'full'}
+                            colorScheme="gray"
                             icon={<MdNotifications />} />
                         <ColorModeSwitcher />
                         <Menu>
                             <MenuButton>
                                 <HStack
-                                    ml={{ base: 2, md: 2, lg: 2}}
                                     alignItems="center"
                                     justifyContent="space-between"
                                     w="full"
-                                    py={{ base: "7px", md: "8px", lg: "6px" }}
-                                    px={{ base: 0, md: 0, lg: 2 }}
                                     rounded="md"
                                     cursor="pointer"
-                                    // bg={useColorModeValue('#edf2f7', '#FFFFFF14') }
-                                    // borderWidth={{ base: "none", lg: "1px"}}
-                                    boxShadow={{ base: "none", lg: "base" }}
-                                    _dark={{ borderWidth: "1px", rounded: 'md', bg: '#FFFFFF14' }}
                                 >
                                     <VStack
-                                        display={{ base: 'none', lg: 'flex' }}
+                                        display='none'
                                         alignItems="flex-start"
                                         spacing="1px"
                                     >
@@ -122,12 +118,13 @@ const Topnav = (props) => {
                                         </Text>
                                     </VStack>
                                     <Avatar
+                                        alignItems={'center'}
                                         size="sm"
                                         fontSize={'xs'}
                                         cursor="pointer"
                                         fontWeight={'extrabold'}
                                         color={'white'}
-                                        bg={'#6c0daf'}
+                                        bg="messenger.500"
                                         name={user?.usuario?.nombre}
                                         src={user?.usuario?.img}
                                     />
@@ -146,7 +143,7 @@ const Topnav = (props) => {
                                         size={'lg'}
                                         color={'white'}
                                         fontWeight={'black'}
-                                        bg={'#6c0daf'}
+                                        bg={'messenger.500'}
                                         name={user?.usuario?.nombre}
                                         boxShadow={'base'}
                                     />
