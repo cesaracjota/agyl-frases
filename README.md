@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo Screenshots - Progressive Project
 
 [![Screen Preview](./preview1.png)](./preview1.png)
 

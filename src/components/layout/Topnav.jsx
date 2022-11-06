@@ -59,7 +59,7 @@ const Topnav = (props) => {
                     top="0"
                     align="center"
                     justify="space-between"
-                    w="full"
+                    w={'full'}
                     px="4"
                     color="inherit"
                     py={4}
@@ -82,7 +82,6 @@ const Topnav = (props) => {
                         display={{ base: "flex", lg: "none" }}
                         onClick={props.onOpen}
                         fontSize="2xl"
-                        ml={-2}
                         variant="ghost"
                         icon={<RiMenu4Fill />}
                         size="md"
@@ -126,7 +125,7 @@ const Topnav = (props) => {
                                         color={'white'}
                                         bg="messenger.500"
                                         name={user?.usuario?.nombre}
-                                        src={user?.usuario?.img}
+                                        src={'https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745'}
                                     />
                                 </HStack>
                             </MenuButton>
@@ -145,6 +144,7 @@ const Topnav = (props) => {
                                         fontWeight={'black'}
                                         bg={'messenger.500'}
                                         name={user?.usuario?.nombre}
+                                        src={'https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745'}
                                         boxShadow={'base'}
                                     />
                                 </Center>

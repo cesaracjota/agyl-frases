@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { Badge, Box, Center, Flex, HStack, Icon,IconButton,Spinner,Stack,Text, useColorModeValue } from '@chakra-ui/react'
+import { Badge, Box, HStack, Icon,IconButton,Stack,Text, useColorModeValue } from '@chakra-ui/react'
 import Moment from 'moment';
-import { MdDelete, MdFilterList, MdFirstPage, MdLastPage } from 'react-icons/md';
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from 'react-icons/io';
+import { MdDelete, MdFilterList } from 'react-icons/md';
 import { CgExport } from 'react-icons/cg';
 import DataTable, { createTheme } from 'react-data-table-component';
 import DataTableExtensions from 'react-data-table-component-extensions';
@@ -15,6 +14,8 @@ import ModalEditarCategoria from './ModalEditarCategoria';
 import ModalDetallesCategoria from './ModalDetallesCategoria';
 import { ToastChakra } from '../../../helpers/toast';
 import { AlertEliminar } from './AlertEliminar';
+import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
+import { SpinnerComponent } from '../../../helpers/spinner';
 
 const Categorias = () => {
 
@@ -28,7 +29,7 @@ const Categorias = () => {
 
     useEffect(() => {
         if(isError) {
-            ToastChakra('Error', message, 'error', 3000);
+            ToastChakra('Error', message, 'error', 1000);
             console.log(message);
         }
 
@@ -98,7 +99,6 @@ const Categorias = () => {
             name: 'ACCIONES',
             sortable: true,
             export: false,
-            resizable: true,
             center: true,
             cell : row => (
                 <div>
@@ -106,7 +106,8 @@ const Categorias = () => {
                     <ModalEditarCategoria row={row} />
                     <AlertEliminar row={row} />
                 </div>
-            )
+            ),
+            width : '180px' 
         }
     ]
 
@@ -141,10 +142,34 @@ const Categorias = () => {
         return <SpinnerComponent />
     }
 
+    const customStyles = {
+        rows: {
+            style: {
+                minHeight: '60px', // override the row height
+            }
+        },
+        headCells: {
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                paddingLeft: '20px', // override the cell padding for head cells
+                paddingRight: '20px',
+            },
+        },
+        cells: {
+            style: {
+                fontSize: '14px',
+                paddingLeft: '20px', // override the cell padding for data cells
+                paddingRight: '20px',
+
+            },
+        },
+    };
+
     return (
         <>
             <Box
-                borderRadius="md"
+                borderRadius="xs"
                 boxShadow="base"
                 overflow="hidden"
                 bg="white"
@@ -162,7 +187,7 @@ const Categorias = () => {
                     </Stack>
             </Box>
             <Box
-                borderRadius="md"
+                borderRadius="xs"
                 overflow="hidden"
                 boxShadow={'base'}
                 bg="white"
@@ -183,10 +208,10 @@ const Categorias = () => {
                             defaultSortAsc={false}
                             defaultSortOrder="desc"
                             pagination={true}
-                            paginationIconFirstPage={< Icon as={MdFirstPage} boxSize={6} _dark={{ color: "gray.300"}} />}
-                            paginationIconLastPage={< Icon as={MdLastPage} boxSize={6} _dark={{ color: "gray.300"}} />}
-                            paginationIconPrevious={< Icon as={IoIosArrowDropleftCircle} boxSize={6} _dark={{ color: "gray.300", _hover: { color: "white" } }} />}
-                            paginationIconNext={< Icon as={IoIosArrowDroprightCircle} boxSize={6} _dark={{ color: "gray.300", _hover: { color: "white" } }} />}
+                            paginationIconFirstPage={< Icon as={FiChevronsLeft} boxSize={6} _dark={{ color: "gray.300"}} />}
+                            paginationIconLastPage={< Icon as={FiChevronsRight} boxSize={6} _dark={{ color: "gray.300"}} />}
+                            paginationIconPrevious={< Icon as={FiChevronLeft} boxSize={6} _dark={{ color: "gray.300", _hover: { color: "white" } }} />}
+                            paginationIconNext={< Icon as={FiChevronRight} boxSize={6} _dark={{ color: "gray.300", _hover: { color: "white" } }} />}
                             paginationRowsPerPageOptions={[5 ,10, 25, 50]}
                             paginationPerPage={10}
                             paginationComponentOptions={{
@@ -197,6 +222,7 @@ const Categorias = () => {
                                 selectAllRowsItemText: 'Todos',
                             }}
                             theme={themeTable}
+                            customStyles={customStyles}
                             pointerOnHover={true}
                             responsive={true}
                             noDataComponent={<Text mb={4} fontSize="lg">NO DATA FOUND</Text>}
@@ -209,28 +235,3 @@ const Categorias = () => {
 }
 
 export default Categorias;
-
-
-function SpinnerComponent () {
-
-    return (
-        <Flex alignItems="center" h={'100%'} w={'full'} justifyContent="center">
-            <Center>
-                <Stack spacing={4} px={4} direction="column" align={'center'}>
-                    <Text fontSize="xl" fontWeight="bold">
-                        {' '}
-                        Cargando ...{' '}
-                    </Text>
-                    <Spinner
-                        thickness="2px"
-                        speed="0.5s"
-                        emptyColor="gray.200"
-                        color="purple.500"
-                        size="xl"
-                        variant={'solid'}
-                    />
-                </Stack>
-            </Center>
-        </Flex>
-    )
-}

@@ -5,7 +5,6 @@ import {
     Collapse,
     Flex,
     Icon,
-    IconButton,
     Image,
     Link,
     Text,
@@ -19,7 +18,6 @@ import { HiCode, HiCollection } from "react-icons/hi";
 import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ArrowLeftIcon } from '@chakra-ui/icons';
 
 const NavItem = (props) => {
 
@@ -87,19 +85,25 @@ const SidebarContent = (props) => {
                 border
                 color="#fffffff9"
                 boxShadow="0px 3px 5px -1px rgba(0,0,0,.2),0px 5px 8px 0px rgba(0,0,0,.14),0px 1px 14px 0px rgba(0,0,0,.12)"
-                w="60"
+                w="240px"
                 {...props}
             >
                 <Flex px="2" py="6" direction={'row'} alignItems="center" justifyContent="space-around">
                     <Image src={'https://react-material.fusetheme.com/assets/images/logo/logo.svg'} w={"30px"} alt="logo Agyl" />
                     <Text fontWeight="bold" fontSize="lg" textAlign="center">AgylCode - API</Text>
-                    <IconButton icon={<ArrowLeftIcon />} fontSize="sm" _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" } }} size="sm" colorScheme="blue" />
+                    {/* <IconButton 
+                        icon={<ArrowLeftIcon />} 
+                        fontSize="sm" 
+                        _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" } }} 
+                        size="sm" 
+                        colorScheme="blue"
+                    /> */}
                 </Flex>
 
                 <Flex px="2" py="4" align="center" direction={'column'} bg="primary.800" borderRadius="lg" mx={2} mt={"10px"} mb={2} boxShadow="2xl">
                     <Avatar 
                         size="xl" 
-                        src={'https://avatars.githubusercontent.com/u/81894363?s=400&u=64374a3de6891e77bf2d5c6decfabb86ccc1623d&v=4'}
+                        src={'https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745'}
                         bg={'transparent'}
                         boxShadow="base"
                     />

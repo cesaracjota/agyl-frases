@@ -3,6 +3,12 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_API_URL;
 
+// Get all phrases
+const getAllPhrases = async () => {
+    const response = await axios.get(`${baseURL}/frases`);
+    return response.data.frases;
+}
+
 // Get random phrase
 
 const getRandomPhrase = async () => {
@@ -12,6 +18,7 @@ const getRandomPhrase = async () => {
 
 const fraseService = {
     getRandomPhrase,
+    getAllPhrases,
 }
 
 export default fraseService;

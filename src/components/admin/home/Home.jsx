@@ -23,7 +23,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
 
-  const { frases } = useSelector((state) => state.frases);
+  const { fraseRamdom } = useSelector((state) => state.frases);
 
   useEffect(() => {
     dispatch(getRandomFrase());
@@ -200,7 +200,7 @@ const Home = () => {
               </Box>
               <VStack textAlign="left" align="left">
                 <Text fontWeight="bold" fontSize="lg">Welcome to Agyl - API</Text>
-                <Text color="gray.100" display={['none', 'none', 'block', 'block']}>{frases?.contenido ? frases?.contenido : 'no found data'}</Text>
+                <Text color="gray.100" display={['none', 'none', 'block', 'block']}>{fraseRamdom?.contenido ? fraseRamdom?.contenido : 'no found data'}</Text>
               </VStack>
             </Stack>
             <Button py={5} ml={4} px={6} border="1px" borderColor="white" _hover={{ bg: "gray.50", color: "gray.900" }}  variant="outline" rounded="full" size="sm" color="white">Get Started</Button>

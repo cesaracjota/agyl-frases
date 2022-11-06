@@ -15,11 +15,11 @@ const Dashboard = ({ componente: Component }) => {
             _dark={{ bg: "#111617" }} 
             minH="100vh"
         >
-            <SidebarContent onClose={sidebar.onClose} display={{ base: "none", lg: "unset" }} />
+            <SidebarContent display={{ base: 'none', lg: 'unset' }} />
 
             <Topnav isOpen={sidebar.isOpen} onClose={sidebar.onClose} onOpen={sidebar.onOpen} />
 
-            <Box mt={"90px"} ml={{ base: 0, lg: 60 }} transition=".1s ease">
+            <Box mt={"90px"} ml={{ base: 0, lg: "240px" }} transition=".1s ease">
                 <Container maxW="container.4xl">
                     { Component }
                 </Container>
