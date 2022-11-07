@@ -91,7 +91,7 @@ export const categoriaSlice = createSlice({
     name: "categorias",
     initialState,
     reducers: {
-        reset : (state) => initialState,
+        reset : () => initialState,
     },
     extraReducers: (builder) => {
         builder

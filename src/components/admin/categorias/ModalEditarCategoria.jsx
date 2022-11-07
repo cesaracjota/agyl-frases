@@ -47,7 +47,7 @@ const ModalEditarCategoria = ({ row }) => {
             />
             <Modal isOpen={isModalOpen} onClose={handleModalClose} size="4xl">
                 <ModalOverlay/>
-                    <ModalContent _dark={{ bg: "primary.modal" }}>
+                    <ModalContent _dark={{ bg: "primary.900" }}>
                         <ModalHeader textAlign="center">UPDATE CATEGORY</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>

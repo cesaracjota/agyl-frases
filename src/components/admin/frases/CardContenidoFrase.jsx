@@ -26,7 +26,7 @@ export const CardContenidoFrase = ({ categoria }) => {
 
     return (
         <>
-            <Box px={2} py={2} bgGradient={bg} borderRadius={'2xl'} minW="220px" w="full" justifyContent="center" alignItems="center">
+            <Box px={2} pt={2} bgGradient={bg} borderRadius={'2xl'} minW="220px" w="full" justifyContent="center" alignItems="center">
                 <HStack spacing={2} direction="row" justifyContent="end">
                     <IconButton
                         colorScheme="whiteAlpha"
@@ -38,9 +38,9 @@ export const CardContenidoFrase = ({ categoria }) => {
                         variant="ghost"
                         rounded="full" />
                 </HStack>
-                <Stack px={4} py={2} direction="column" justifyContent="center" alignItems="center">
+                <Stack px={4} py={14} direction="column" justifyContent="center" alignItems="center">
                     <Text fontSize="6xl" fontWeight="extrabold" color={'white'}>60</Text>
-                    <Text fontSize="md" color={'white'}>Frases</Text>
+                    <Text fontSize="lg" color={'white'}>Frases</Text>
                 </Stack>
                 <Divider borderColor={'white'} />
                 <Stack spacing={2} px={4} py={4} direction="column" justifyContent="center" alignItems="center">

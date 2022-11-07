@@ -61,24 +61,24 @@ const ModalAgregarCategoria = () => {
             />
             <Modal isOpen={isModalOpen} onClose={handleModalClose} size="4xl">
                 <ModalOverlay/>
-                    <ModalContent _dark={{ bg: "primary.modal" }}>
-                        <ModalHeader textAlign="center">ADD NEW CATEGORY</ModalHeader>
+                    <ModalContent _dark={{ bg: "primary.900" }}>
+                        <ModalHeader textAlign="center">AGREGAR NUEVA CATEGORIA</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             <Stack spacing={4} direction="column" justifyContent="space-between" p={4}>
                                 <FormControl isRequired>
-                                    <FormLabel>NAME</FormLabel>
+                                    <FormLabel>NOMBRE CATEGORIA</FormLabel>
                                     <Input
-                                        placeholder="Write name of the category"
+                                        placeholder="ESCRIBE EL NOMBRE DE LA CATEGORIA"
                                         type="text"
                                         onChange={(e) => setIndice({ ...indice, nombre: e.target.value })}
                                         textTransform="uppercase"
                                     />
                                 </FormControl>
                                 <FormControl isRequired>
-                                    <FormLabel>DESCRIPTION</FormLabel>
+                                    <FormLabel>DESCRIPCIÓN</FormLabel>
                                     <Textarea
-                                        placeholder="Write a description"
+                                        placeholder="ESCRIBE LA DESCRIPCIÓN DE LA CATEGORIA"
                                         type="text"
                                         onChange={(e) => setIndice({ ...indice, descripcion: e.target.value })}
                                         textTransform="uppercase"
@@ -88,10 +88,17 @@ const ModalAgregarCategoria = () => {
                         </ModalBody>
                         <ModalFooter>
                             <Button colorScheme="red" _dark={{ bg: "red.500", color: "white", _hover: { bg: "red.600" }}} size="lg" mr={3} onClick={handleModalClose}>
-                                CANCEL
+                                CANCELAR
                             </Button>
-                            <Button colorScheme="messenger" _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.600" }}} size="lg" mr={3} onClick={handleSave}>
-                                SAVE
+                            <Button 
+                                colorScheme="messenger" 
+                                _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.600" }}} 
+                                size="lg" 
+                                mr={3} 
+                                onClick={handleSave}
+                                disabled={indice.nombre === '' || indice.descripcion === ''}
+                            >
+                                GUARDAR
                             </Button>
                         </ModalFooter>
                     </ModalContent>

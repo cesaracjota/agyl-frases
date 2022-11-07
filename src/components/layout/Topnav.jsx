@@ -130,7 +130,7 @@ const Topnav = (props) => {
                                 </HStack>
                             </MenuButton>
                             <MenuList
-                                bg={useColorModeValue('white', '#181a1b')}
+                                bg={useColorModeValue('white', 'primary.800')}
                                 borderColor={useColorModeValue('gray.200', 'gray.700')}
                                 alignItems={'center'}
                                 bgSize={'md'}

@@ -47,7 +47,7 @@ const ModalDetallesCategoria = ({ categoria }) => {
                 size="xl"
             >
                 <DrawerOverlay />
-                <DrawerContent _dark={{ bg: "primary.1000" }}>
+                <DrawerContent _dark={{ bg: "primary.800" }}>
                     <DrawerHeader fontWeight="bold" bg="blue.600" color="gray.200" textAlign="center">INFORMACIÓN BASICA DE LA CATEGORÍA SELECCIONADA</DrawerHeader>
                     <DrawerBody>
                         <Stack direction="column" mt={6} px={[0, 10, 40, 60]}>

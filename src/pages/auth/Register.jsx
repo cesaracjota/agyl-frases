@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { register, reset } from '../features/auth/authSlice';
+import { register, reset } from '../../features/auth/authSlice';
 
 const RegisterPage = () => {
     const [nombre, setNombre] = useState('');
@@ -30,7 +30,7 @@ const RegisterPage = () => {
     const toast = useToast();
     const dispatch = useDispatch();
 
-    const bgCardColor = useColorModeValue('gray.50', 'gray.900');
+    const bgCardColor = useColorModeValue('gray.50', 'primary.800');
 
     useEffect(() => {
         if (isError) {
@@ -93,17 +93,17 @@ const RegisterPage = () => {
                     thickness="4px"
                     speed="0.5s"
                     emptyColor="gray.200"
-                    color="purple.500"
+                    color="messenger.500"
                     size="xl"
                 />
             </Stack>
         </Center>
     ) : (
-        <Box w={'full'} bg="#1b1d1e">
+        <Box w={'full'} bg="primary.900">
             <Center h={'100vh'} w={'full}'}>
                 <Box
                     px={14}
-                    py={8}
+                    py={12}
                     boxShadow="base"
                     borderRadius="md"
                     bg={bgCardColor}
@@ -112,7 +112,7 @@ const RegisterPage = () => {
                         <Heading size={'lg'} fontWeight="bold">
                             Welcome to Register Page
                         </Heading>
-                        <Avatar size="lg" bg="purple.500" />
+                        <Avatar size="lg" bg="messenger.500" />
                         <FormControl id="name">
                             <FormLabel>Name</FormLabel>
                             <Input type="text" onChange={e => setNombre(e.target.value)} />
@@ -132,7 +132,8 @@ const RegisterPage = () => {
                             <Button
                                 mt={4}
                                 w="full"
-                                colorScheme={'purple'}
+                                colorScheme={'messenger'}
+                                _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" }}}
                                 onClick={handleLogin}
                                 disabled={(nombre === '' && correo === '') || (password === '')}
                             >

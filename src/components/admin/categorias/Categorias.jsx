@@ -16,6 +16,7 @@ import { ToastChakra } from '../../../helpers/toast';
 import { AlertEliminar } from './AlertEliminar';
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import { SpinnerComponent } from '../../../helpers/spinner';
+import { customStyles } from '../../../helpers/customStyles';
 
 const Categorias = () => {
 
@@ -141,30 +142,6 @@ const Categorias = () => {
     if (isLoading) {
         return <SpinnerComponent />
     }
-
-    const customStyles = {
-        rows: {
-            style: {
-                minHeight: '60px', // override the row height
-            }
-        },
-        headCells: {
-            style: {
-                fontSize: '14px',
-                fontWeight: 'bold',
-                paddingLeft: '20px', // override the cell padding for head cells
-                paddingRight: '20px',
-            },
-        },
-        cells: {
-            style: {
-                fontSize: '14px',
-                paddingLeft: '20px', // override the cell padding for data cells
-                paddingRight: '20px',
-
-            },
-        },
-    };
 
     return (
         <>

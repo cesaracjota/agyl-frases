@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'
-import { Box, Text, HStack, Icon, IconButton, SimpleGrid, Stack, useColorModeValue } from '@chakra-ui/react'
+import { Box, Text, HStack, Icon, IconButton, Stack, useColorModeValue } from '@chakra-ui/react'
 import { CgExport } from 'react-icons/cg'
 import { MdDelete, MdFilterList } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { CardContenidoFrase } from './CardContenidoFrase'
 import { getCategories, reset } from '../../../features/categorias/categoriaSlice'
 import { SpinnerComponent } from '../../../helpers/spinner'
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi'
@@ -15,13 +14,14 @@ import { getAllFrases } from '../../../features/frases/fraseSlice'
 import { ModalAgregarFrase } from './ModalAgregarFrase'
 import { ModalDetallesFrase } from './ModalDetallesFrase'
 import { ModalEditarFrase } from './ModalEditarFrase'
+import { customStyles } from '../../../helpers/customStyles'
+import { AlertEliminar } from './AlertEliminar'
 
 const Frases = () => {
 
   const dispatch = useDispatch();
-  const themeTable = useColorModeValue('default', 'solarized');
 
-  // const { categorias, isLoading, isError, message } = useSelector((state) => state.categorias);
+  const themeTable = useColorModeValue('default', 'solarized');
 
   const { frases, isLoading } = useSelector((state) => state.frases);
   const { categorias } = useSelector((state) => state.categorias);
@@ -82,8 +82,9 @@ const Frases = () => {
       center: true,
       cell: row => (
         <div>
-          <ModalDetallesFrase />
-          <ModalEditarFrase />
+          <ModalDetallesFrase frases = { row } />
+          <ModalEditarFrase row = { row } categorias = { categories } />
+          <AlertEliminar row = { row } />
         </div>
       ),
     }
@@ -101,7 +102,7 @@ const Frases = () => {
   return (
     <>
       <Box
-        borderRadius="lg"
+        borderRadius="sm"
         boxShadow="base"
         overflow="hidden"
         bg="white"
@@ -109,8 +110,7 @@ const Frases = () => {
       >
         <Stack spacing={4} direction="row" justifyContent="space-between" p={4}>
           <HStack spacing={4} direction="row">
-            <ModalAgregarFrase />
-            {/* <ModalAgregarCategoria /> */}
+            <ModalAgregarFrase categorias = { categories } />
             <IconButton colorScheme="red" _dark={{ bg: "red.600", color: "white", _hover: { bg: "red.700" } }} aria-label='Eliminar' icon={<Icon as={MdDelete} fontSize="2xl" />} variant="solid" rounded="full" />
           </HStack>
           <HStack spacing={4} direction="row">
@@ -119,7 +119,7 @@ const Frases = () => {
           </HStack>
         </Stack>
       </Box>
-      <Box
+      {/* <Box
         borderRadius="xl"
         mt={2}
         p={4}
@@ -144,9 +144,9 @@ const Frases = () => {
             <CardContenidoFrase key={categoria._id} categoria={categoria} />
           ))}
         </SimpleGrid>
-      </Box>
+      </Box> */}
       <Box
-        borderRadius="xl"
+        borderRadius="sm"
         overflow="hidden"
         boxShadow={'base'}
         bg="white"
@@ -183,6 +183,7 @@ const Frases = () => {
             theme={themeTable}
             pointerOnHover={true}
             responsive={true}
+            customStyles={customStyles}
             noDataComponent={<Text mb={4} fontSize="lg">NO DATA FOUND</Text>}
           />
         </DataTableExtensions>

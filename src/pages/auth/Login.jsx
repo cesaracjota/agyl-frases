@@ -13,13 +13,12 @@ import {
     Text,
     VStack,
     useColorModeValue,
-    Switch,
-    HStack,
+    Checkbox,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { login, reset } from '../features/auth/authSlice';
-import { ToastChakra } from '../helpers/toast';
+import { login, reset } from '../../features/auth/authSlice';
+import { ToastChakra } from '../../helpers/toast';
 
 const LoginPage = () => {
 
@@ -30,7 +29,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const bgCardColor = useColorModeValue('gray.50', 'gray.900');
+    const bgCardColor = useColorModeValue('gray.50', 'primary.800');
 
     useEffect(() => {
 
@@ -71,12 +70,12 @@ const LoginPage = () => {
             </Stack>
         </Center>
     ) : (
-        <Box w={'full'} bg="#1b1d1e">
+        <Box w={'full'} bg="primary.900">
             <Center h={'100vh'} w={'full}'}>
                 <Box px={14} py={12} boxShadow="base" borderRadius="md" bg={bgCardColor}>
                     <VStack spacing={4} w="full">
                         <Heading size={'lg'} fontWeight="bold">Welcome to login page!</Heading>
-                        <Avatar size="lg" bg="purple.500" />
+                        <Avatar size="lg" bg="messenger.500" />
                         <FormControl id="email">
                             <FormLabel>Email Address</FormLabel>
                             <Input type="email" onChange={e => setCorreo(e.target.value)} />
@@ -88,21 +87,21 @@ const LoginPage = () => {
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </FormControl>
+                        <Stack direction="row" justifyContent="space-between" w="full">
+                            <Checkbox defaultIsChecked />
+                            <FormLabel>Remember me</FormLabel>
+                        </Stack>
                         <FormControl>
                             <Button
-                                mt={4}
                                 w="full"
-                                colorScheme={'purple'}
+                                colorScheme={'messenger'}
+                                _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" }}}
                                 onClick={handleLogin}
                                 disabled={correo === '' || password === ''}
                             >
                                 LOGIN
                             </Button>
                         </FormControl>
-                        <HStack spacing={4}>
-                            <Text fontSize="sm">¿Recordarme la contraseña?</Text>
-                            <Switch colorScheme="purple" size="md" />
-                        </HStack>
                         <NavLink to="/register">
                             <Text fontSize="sm" color="gray.600">
                                 Don't have an account? Sign up

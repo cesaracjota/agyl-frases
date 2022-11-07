@@ -7,9 +7,9 @@ import FrasesPage from '../pages/admin/frases';
 import HomeContent from '../pages/admin/home';
 import SettingsPage from '../pages/admin/settings';
 import UsuariosPage from '../pages/admin/usuarios';
-import LoginPage from '../pages/Login';
-import NotFoundPage from '../pages/NotFoundPage';
-import RegisterPage from '../pages/Register';
+import LoginPage from '../pages/auth/Login';
+import NotFoundPage from '../pages/404/NotFoundPage';
+import RegisterPage from '../pages/auth/Register';
 import PrivateRoutes from './PrivateRoutes';
 import PublicRoute from './PublicRoute';
 

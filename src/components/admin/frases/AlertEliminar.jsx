@@ -12,9 +12,9 @@ import {
     Flex,
   } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux';
-import { deleteCategory } from '../../../features/categorias/categoriaSlice';
 import { MdDelete } from 'react-icons/md';
 import { AiOutlineAlert } from 'react-icons/ai';
+import { deleteFrase } from '../../../features/frases/fraseSlice';
 
 export const AlertEliminar = ({ row }) => {
 
@@ -31,7 +31,7 @@ export const AlertEliminar = ({ row }) => {
     }
 
     const handleDelete = (id) => {
-        dispatch(deleteCategory(id));
+        dispatch(deleteFrase(id));
     }
 
     return (
