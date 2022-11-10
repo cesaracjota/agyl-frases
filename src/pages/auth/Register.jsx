@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Avatar,
     Box,
     Button,
     Center,
@@ -11,13 +10,15 @@ import {
     Spinner,
     Stack,
     Text,
-    VStack,
     useToast,
-    useColorModeValue,
+    HStack,
+    Flex,
+    Image,
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { register, reset } from '../../features/auth/authSlice';
+import { ToastChakra } from '../../helpers/toast';
 
 const RegisterPage = () => {
     const [nombre, setNombre] = useState('');
@@ -30,32 +31,14 @@ const RegisterPage = () => {
     const toast = useToast();
     const dispatch = useDispatch();
 
-    const bgCardColor = useColorModeValue('gray.50', 'primary.800');
-
     useEffect(() => {
         if (isError) {
-            toast({
-                title: 'Error',
-                description: message,
-                status: 'error',
-                duration: 3000,
-                isClosable: true,
-                position: 'top-right',
-                variant: 'top-accent',
-            });
+            ToastChakra('Error', message, 'error', 1500, 'top-right');
         }
 
         if (isSuccess || user) {
             navigate('/inicio');
-            toast({
-                title: 'Bienvenido',
-                description: 'Bienvenido a la aplicación',
-                status: 'success',
-                duration: 3000,
-                isClosable: true,
-                position: 'top-right',
-                variant: 'top-accent',
-            });
+            ToastChakra('Bienvenido', message, 'success', 1500, 'top-right');
         }
 
         dispatch(reset());
@@ -99,32 +82,46 @@ const RegisterPage = () => {
             </Stack>
         </Center>
     ) : (
-        <Box w={'full'} bg="primary.900">
-            <Center h={'100vh'} w={'full}'}>
-                <Box
-                    px={14}
-                    py={12}
-                    boxShadow="base"
-                    borderRadius="md"
-                    bg={bgCardColor}
-                >
-                    <VStack spacing={2} w="full" mx="auto">
-                        <Heading size={'lg'} fontWeight="bold">
-                            Welcome to Register Page
+        <HStack spacing={2} w={'full'} h={'100vh'} bgImage="https://204.199.168.56/assets/layout/images/lineas-fondo-login.png" px={{ base: 4, lg: 28 }} py={{ base: 14, lg: 20 }}>
+            <Flex w="full" h="full" display={{ base: 'none', lg: 'flex' }}>
+                <Box justifyContent="center" w="full">
+                    <Image
+                        objectFit={'cover'}
+                        w={'full'}
+                        h={'full'}
+                        src="https://204.199.168.56/assets/layout/images/pasante1.webp"
+                        rounded={'lg'}
+                    />
+                </Box>
+            </Flex>
+            <Flex w="full" h="full">
+                <Box borderWidth={1} w="full" h="full" px={{ base: 8, lg: 10 }} mr={2} bg="white" _dark={{ bg: 'primary.900' }} alignItems={'center'} justifyContent={'center'} borderRadius="lg" boxShadow={'base'}>
+                    <Stack w="full" h="full" spacing={4} alignItems="center" justifyContent="center">
+                        <Image src="https://react-material.fusetheme.com/assets/images/logo/logo.svg" w={16} />
+                        <Heading textAlign={'center'} fontSize="xl" fontWeight="bold" mt={2}>
+                            Sistema de Administración de una API
                         </Heading>
-                        <Avatar size="lg" bg="messenger.500" />
                         <FormControl id="name">
-                            <FormLabel>Name</FormLabel>
-                            <Input type="text" onChange={e => setNombre(e.target.value)} />
+                            <FormLabel>Nombre</FormLabel>
+                            <Input 
+                                type="text"
+                                placeholder="Ingrese el nombre completo"
+                                onChange={e => setNombre(e.target.value)} 
+                            />
                         </FormControl>
                         <FormControl id="email">
-                            <FormLabel>Email Address</FormLabel>
-                            <Input type="email" onChange={e => setCorreo(e.target.value)} />
+                            <FormLabel>Correo</FormLabel>
+                            <Input 
+                                type="email"
+                                placeholder="Ingrese el correo electrónico"
+                                onChange={e => setCorreo(e.target.value)} 
+                            />
                         </FormControl>
                         <FormControl id="password">
                             <FormLabel>Password</FormLabel>
                             <Input
                                 type="password"
+                                placeholder="Ingrese el password"
                                 onChange={e => setPassword(e.target.value)}
                             />
                         </FormControl>
@@ -133,22 +130,22 @@ const RegisterPage = () => {
                                 mt={4}
                                 w="full"
                                 colorScheme={'messenger'}
-                                _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" }}}
+                                _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" } }}
                                 onClick={handleLogin}
                                 disabled={(nombre === '' && correo === '') || (password === '')}
                             >
-                                REGISTER
+                                Registrarse
                             </Button>
                         </FormControl>
                         <NavLink to="/login">
-                            <Text fontSize="sm" color="gray.600">
-                                Already have an account? Sign in
+                            <Text fontSize="sm" color="gray.600" _dark={{ color: 'gray.400'}}>
+                                ¿Ya tiene una cuenta? Iniciar sesión
                             </Text>
                         </NavLink>
-                    </VStack>
+                    </Stack>
                 </Box>
-            </Center>
-        </Box>
+            </Flex>
+        </HStack>
     );
 
     return content;

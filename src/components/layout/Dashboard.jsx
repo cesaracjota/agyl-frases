@@ -9,7 +9,7 @@ const Dashboard = ({ componente: Component }) => {
     const sidebar = useDisclosure();
 
     return (
-        <Box 
+        <Box
             as="section" 
             bg="gray.50" 
             _dark={{ bg: "#111617" }} 
@@ -24,10 +24,10 @@ const Dashboard = ({ componente: Component }) => {
                     { Component }
                 </Container>
                 {/* footer */}
-                {/* don't necesary use footer component, it's depend your chose */}
                 {/* <Divider  mt={4}/> */}
                 {/* <Footer/> */}
             </Box>
+            &nbsp;
         </Box>
     )
 }

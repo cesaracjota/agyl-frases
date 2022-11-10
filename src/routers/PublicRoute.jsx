@@ -12,7 +12,7 @@ const PublicRoute = () => {
 
     return(
 
-        user ? <Navigate to={ user?.usuario?.role === "ADMIN_ROLE" ? '/inicio' : '/acerca-de'} state={{ from: location }} replace /> : <Outlet />
+        user ? <Navigate to={ '/inicio' } state={{ from: location }} replace /> : <Outlet />
     
     )
 }

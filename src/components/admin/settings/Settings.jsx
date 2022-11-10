@@ -1,8 +1,11 @@
 import React from 'react'
+import { CardSettings } from './CardSettings'
 
 const Settings = () => {
   return (
-    <div>Settings</div>
+    <>
+      <CardSettings />
+    </>
   )
 }
 

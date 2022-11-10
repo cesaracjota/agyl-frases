@@ -113,7 +113,7 @@ const Topnav = (props) => {
                                     >
                                         <Text fontSize="12px" fontWeight={'bold'} textTransform={'uppercase'}>{user?.usuario?.nombre}</Text>
                                         <Text fontSize="10px" color="gray.700" _dark={{ color: "gray.300"}} textAlign="center">
-                                            {user?.usuario?.role === ROL.ADMIN ? 'ADMINISTRADOR' : 'USUARIO'}
+                                            {user?.usuario?.rol === ROL.ADMIN ? 'ADMINISTRADOR' : 'USUARIO'}
                                         </Text>
                                     </VStack>
                                     <Avatar
@@ -152,7 +152,7 @@ const Topnav = (props) => {
                                     <VStack mt="2">
                                         <Text fontSize="sm" mx={8} fontWeight="bold" textTransform={'uppercase'}>{user?.usuario?.nombre}</Text>
                                         <Text fontSize="sm" color="gray.600" _dark={{ color: "gray.300" }}>{user?.usuario?.correo}</Text>
-                                        <Text fontSize="xs" color="gray.600" _dark={{ color: "gray.400" }}>{user?.usuario?.role === ROL.ADMIN ? 'ADMINISTRADOR' : 'USUARIO'}</Text>
+                                        <Text fontSize="xs" color="gray.600" _dark={{ color: "gray.400" }}>{user?.usuario?.rol === ROL.ADMIN ? 'ADMINISTRADOR' : 'USUARIO'}</Text>
                                     </VStack>
                                 </Center>
                                 <MenuDivider />

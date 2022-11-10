@@ -188,7 +188,6 @@ const Frases = () => {
           />
         </DataTableExtensions>
       </Box>
-      &nbsp;
     </>
   )
 }

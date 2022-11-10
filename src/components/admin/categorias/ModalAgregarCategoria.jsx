@@ -78,10 +78,9 @@ const ModalAgregarCategoria = () => {
                                 <FormControl isRequired>
                                     <FormLabel>DESCRIPCIÓN</FormLabel>
                                     <Textarea
-                                        placeholder="ESCRIBE LA DESCRIPCIÓN DE LA CATEGORIA"
+                                        placeholder="Escribe la descripcion de la categoria"
                                         type="text"
                                         onChange={(e) => setIndice({ ...indice, descripcion: e.target.value })}
-                                        textTransform="uppercase"
                                     />
                                 </FormControl>
                             </Stack>

@@ -2,22 +2,20 @@ import React from 'react'
 import {
     Avatar,
     Box,
-    Collapse,
     Flex,
     Icon,
     Image,
     Link,
     Text,
     useColorModeValue,
-    useDisclosure,
 } from '@chakra-ui/react'
 
-import { FaClipboardCheck, FaRss } from "react-icons/fa";
-import { BsGearFill } from "react-icons/bs";
-import { HiCode, HiCollection } from "react-icons/hi";
-import { MdHome, MdKeyboardArrowRight } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AddIcon } from '@chakra-ui/icons';
+import { RiHome5Fill } from 'react-icons/ri';
+import { FaClipboardCheck, FaQuoteRight, FaUsers } from 'react-icons/fa';
+import { MdSettings } from 'react-icons/md';
 
 const NavItem = (props) => {
 
@@ -46,7 +44,6 @@ const NavItem = (props) => {
             {icon && (
                 <Icon
                     mx="2"
-                    // boxSize={5}
                     fontSize="xl"
                     _groupHover={{
                         color: activeLinkcolor,
@@ -62,12 +59,43 @@ const NavItem = (props) => {
 
 const SidebarContent = (props) => {
 
-    const integrations = useDisclosure();
-
     const activeLinkcolor = "gray.50";
     const bgActiveLinkColor = "primary.700";
 
     const { user } = useSelector(state => state.auth);
+
+    const listIcons = [
+        {
+            icon: RiHome5Fill,
+            name: "RiHome5Fill",
+        },
+        {
+            icon: FaClipboardCheck,
+            name: "FaClipboardCheck",
+        },
+        {
+            icon: FaQuoteRight,
+            name: "FaQuoteRight",
+        },
+        {
+            icon: FaUsers,
+            name: "FaUsers",
+        },
+        {
+            icon: MdSettings,
+            name: "MdSettings",
+        }
+    ]
+
+    function getIconosNames(name) {
+        const icon = listIcons.find((item) => item.name === name);
+        return icon.name;
+    }
+
+    function getIconIcons(icono) {
+        const icon = listIcons.find((item) => item.name === icono);
+        return icon.icon;
+    }
 
     return (
         <>
@@ -91,18 +119,11 @@ const SidebarContent = (props) => {
                 <Flex px="2" py="6" direction={'row'} alignItems="center" justifyContent="space-around">
                     <Image src={'https://react-material.fusetheme.com/assets/images/logo/logo.svg'} w={"30px"} alt="logo Agyl" />
                     <Text fontWeight="bold" fontSize="lg" textAlign="center">AgylCode - API</Text>
-                    {/* <IconButton 
-                        icon={<ArrowLeftIcon />} 
-                        fontSize="sm" 
-                        _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" } }} 
-                        size="sm" 
-                        colorScheme="blue"
-                    /> */}
                 </Flex>
 
                 <Flex px="2" py="4" align="center" direction={'column'} bg="primary.800" borderRadius="lg" mx={2} mt={"10px"} mb={2} boxShadow="2xl">
-                    <Avatar 
-                        size="xl" 
+                    <Avatar
+                        size="xl"
                         src={'https://ps.w.org/user-avatar-reloaded/assets/icon-128x128.png?rev=2540745'}
                         bg={'transparent'}
                         boxShadow="base"
@@ -111,7 +132,7 @@ const SidebarContent = (props) => {
                         {user?.usuario?.nombre}
                     </Text>
                     <Text fontSize="10px" textAlign="center">
-                        {user?.usuario?.role === 'ADMIN_ROLE' ? 'ADMINISTRADOR' : 'USUARIO'}
+                        {user?.usuario?.rol === 'ADMIN_ROLE' ? 'ADMINISTRADOR' : 'USUARIO'}
                     </Text>
                 </Flex>
                 <Flex
@@ -123,41 +144,19 @@ const SidebarContent = (props) => {
                     aria-label="Main Navigation"
                     borderTopRadius={'3xl'}
                 >
-                    <Link mb={2} as={NavLink} to="/inicio" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                        <NavItem icon={MdHome}>Inicio</NavItem>
-                    </Link>
-                    <Link mb={2} as={NavLink} to="/categorias" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                        <NavItem icon={FaClipboardCheck}>Categorias</NavItem>
-                    </Link>
-                    <Link mb={2} as={NavLink} to="/frases" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                        <NavItem icon={HiCollection}>Frases</NavItem>
-                    </Link>
-                        <NavItem icon={HiCode} onClick={integrations.onToggle}>
-                            Usuarios
-                            <Icon
-                                as={MdKeyboardArrowRight}
-                                ml="auto"
-                                transform={integrations.isOpen && "rotate(90deg)"}
-                            />
-                        </NavItem>
-                    <Collapse in={integrations.isOpen}>
-                        <Link mb={2} as={NavLink} to="/usuarios/usuarios" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                            <NavItem pl="12" py="2">
-                                Usuarios
-                            </NavItem>
+                    {user?.menu?.map((item, index) => (
+                        <Link
+                            key={index}
+                            mb={2}
+                            as={NavLink}
+                            to={item.path}
+                            _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}
+                        >
+                            <NavItem icon={
+                                item.icono === getIconosNames(item.icono) ? getIconIcons(item.icono) : AddIcon
+                            }>{item.titulo}</NavItem>
                         </Link>
-                        <Link as={NavLink} to="/usuarios/settings" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                            <NavItem pl="12" py="2">
-                                Administradores
-                            </NavItem>
-                        </Link>
-                    </Collapse>
-                    <Link mb={2} as={NavLink} to="/settings" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                        <NavItem icon={BsGearFill}>Settings</NavItem>
-                    </Link>
-                    <Link mb={2} as={NavLink} to="/acerca-de" _activeLink={{ color: activeLinkcolor, bg: bgActiveLinkColor, borderRadius: 'md' }} _hover={{ textDecoration: 'none', borderRadius: 'md' }}>
-                        <NavItem icon={FaRss}>Acerca De</NavItem>
-                    </Link>
+                    ))}
                 </Flex>
             </Box>
         </>

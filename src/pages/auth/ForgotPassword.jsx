@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     Box,
     Button,
@@ -10,54 +10,26 @@ import {
     Spinner,
     Stack,
     Text,
-    Checkbox,
     HStack,
     Flex,
     Image,
-    Link,
 } from '@chakra-ui/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { login, reset } from '../../features/auth/authSlice';
+import {  useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { ToastChakra } from '../../helpers/toast';
 
-const LoginPage = () => {
+const ForgotPasswordPage = () => {
 
     const [correo, setCorreo] = useState('');
-    const [password, setPassword] = useState('');
-    const [checked, setChecked] = useState(false);
-    const { ROLE, isLoading, isError, isSuccess, message } = useSelector(state => state.auth);
+    const { isLoading } = useSelector(state => state.auth);
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (isError) {
-            ToastChakra('Error', message, 'error', 1500, 'top-right');
+    const handleResetPassword = () => {
+        if (!correo) {
+            ToastChakra('Atención', 'Ingrese su correo', 'error', 1500, 'top-right');
+        } else {
+            ToastChakra('Atención', 'Se ha enviado un correo para restablecer su contraseña', 'success', 1500, 'top-right');
         }
-
-        dispatch(reset());
-
-    }, [dispatch, isError, isSuccess, message, navigate, ROLE]);
-
-    const correoUsuario = window.localStorage.getItem('usuario_correo');
-
-    const handleLogin = () => {
-        try {
-            const userData = {
-                correo,
-                password,
-            };
-            if (checked === true) {
-                window.localStorage.setItem('usuario_correo', userData.correo);
-            } else {
-                window.localStorage.removeItem('usuario_correo');
-            }
-            dispatch(login(userData));
-        } catch (err) {
-            ToastChakra('Error', err.message, 'error', 3000);
-        }
-    };
+    }
 
     const content = (isLoading) ? (
         <Center h={'100vh'} w={'full'}>
@@ -95,49 +67,30 @@ const LoginPage = () => {
                         <Heading textAlign={'center'} fontSize="xl" fontWeight="bold" mt={2}>
                             Sistema de Administración de una API
                         </Heading>
+                        <Heading textAlign={'center'} fontWeight="hairline" fontSize="md" mt={2}>
+                            Recuperar Contraseña
+                        </Heading>
                         <FormControl id="email">
                             <FormLabel mt={4}>Email Address</FormLabel>
                             <Input
                                 type="email"
-                                placeholder='Ingrese su correo'
-                                defaultValue={correoUsuario ? correoUsuario : ''}
+                                placeholder='Ingrese su correo electrónico'
                                 onChange={(e) => setCorreo(e.target.value)}
                             />
                         </FormControl>
-                        <FormControl id="password">
-                            <FormLabel>Password</FormLabel>
-                            <Input
-                                type="password"
-                                placeholder='Ingrese su contraseña'
-                                onChange={e => setPassword(e.target.value)}
-                            />
-                        </FormControl>
-                        <Stack direction="row" align={'start'} justifyContent="space-between" w="full">
-                            <Checkbox
-                                defaultChecked={!correoUsuario ? false : true}
-                                value={checked}
-                                onChange={e => setChecked(e.target.checked)}
-                            >
-                                Recuerdame
-                            </Checkbox>
-                            <Link as={NavLink} to="/forgot-password" color='messenger.500' _hover={{ textDecoration: 'none' }}>
-                                ¿Olvidó su contraseña?
-                            </Link>
-                        </Stack>
                         <FormControl>
                             <Button
                                 w="full"
                                 colorScheme={'messenger'}
                                 _dark={{ bg: "messenger.500", color: "white", _hover: { bg: "messenger.700" } }}
-                                onClick={handleLogin}
-                                disabled={password === ''}
+                                onClick={handleResetPassword}
                             >
-                                Iniciar Sesión
+                                Enviar
                             </Button>
                         </FormControl>
-                        <NavLink to="/register">
+                        <NavLink to="/login">
                             <Text fontSize="sm" color="gray.600" _dark={{ color: 'gray.400'}}>
-                                ¿No tiene una cuenta? Regístrese
+                                Regresar a login
                             </Text>
                         </NavLink>
                     </Stack>
@@ -149,4 +102,4 @@ const LoginPage = () => {
     return content;
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;

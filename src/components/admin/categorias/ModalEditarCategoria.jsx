@@ -1,5 +1,23 @@
 import React, { useState } from 'react'
-import { Button, FormControl, FormLabel, Icon, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Switch, Text, Textarea } from '@chakra-ui/react'
+import { 
+    Button, 
+    FormControl, 
+    FormLabel, 
+    Icon, 
+    IconButton, 
+    Input, 
+    Modal, 
+    ModalBody, 
+    ModalCloseButton, 
+    ModalContent, 
+    ModalFooter, 
+    ModalHeader, 
+    ModalOverlay, 
+    Stack,
+    Switch, 
+    Text, 
+    Textarea 
+} from '@chakra-ui/react'
 import { VscEdit } from 'react-icons/vsc'
 import { useDispatch } from 'react-redux';
 import { updateCategories } from '../../../features/categorias/categoriaSlice';
@@ -48,7 +66,7 @@ const ModalEditarCategoria = ({ row }) => {
             <Modal isOpen={isModalOpen} onClose={handleModalClose} size="4xl">
                 <ModalOverlay/>
                     <ModalContent _dark={{ bg: "primary.900" }}>
-                        <ModalHeader textAlign="center">UPDATE CATEGORY</ModalHeader>
+                        <ModalHeader textAlign="center">ACTUALIZAR CATEGORIA</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
                             <Stack spacing={4} direction="column" justifyContent="space-between" p={4}>
@@ -56,43 +74,42 @@ const ModalEditarCategoria = ({ row }) => {
                                     <FormLabel>ID</FormLabel>
                                     <Input
                                         defaultValue={indice ? indice._id : ''}
-                                        placeholder="Write name of the category"
                                         type="text"
                                         readOnly={true}
                                     />
                                 </FormControl>
                                 <FormControl>
-                                    <FormLabel>NAME</FormLabel>
+                                    <FormLabel>NOMBRE</FormLabel>
                                     <Input
                                         defaultValue={indice ? indice.nombre : ''}
-                                        placeholder="Write name of the category"
+                                        placeholder="Escribe el nombre de la categoria"
                                         type="text"
                                         onChange={(e) => setIndice({ ...indice, nombre: e.target.value })}
                                         textTransform="uppercase"
                                     />
                                 </FormControl>
                                 <FormControl>
-                                    <FormLabel>DESCRIPTION</FormLabel>
+                                    <FormLabel>DESCRIPCIÓN</FormLabel>
                                     <Textarea
                                         defaultValue={indice ? indice.descripcion : ''}
-                                        placeholder="Write a description"
+                                        placeholder="Escribe la descripcion de la categoria"
                                         type="text"
                                         onChange={(e) => setIndice({ ...indice, descripcion: e.target.value })}
                                         textTransform="uppercase"
                                     />
                                 </FormControl>
                                 <Stack direction="row" justifyContent="space-between" w="full">
-                                    <Text>STATUS</Text>
+                                    <Text>ESTADO</Text>
                                     <Switch onChange={(e) => setIndice({ ...indice, estado: e.target.checked })} value={ indice ? indice.estado : null } colorScheme="purple" isChecked = {indice.estado === true ? true : false} size='lg' />
                                 </Stack>
                             </Stack>
                         </ModalBody>
                         <ModalFooter>
                             <Button colorScheme="red" _dark={{ bg: "red.500", color: "white", _hover: { bg: "red.600" }}} size="lg" mr={3} onClick={handleModalClose}>
-                                CANCEL
+                                CANCELAR
                             </Button>
                             <Button colorScheme="green" _dark={{ bg: "green.600", color: "white", _hover: { bg: "green.800" }}} size="lg" mr={3} onClick={handleUpdate}>
-                                UPDATE
+                                ACTUALIZAR
                             </Button>
                         </ModalFooter>
                     </ModalContent>

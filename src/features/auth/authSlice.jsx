@@ -78,7 +78,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.user = action.payload;
-                state.ROLE = action.payload.usuario.role;
+                state.ROLE = action.payload.usuario.rol;
             })
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
@@ -94,7 +94,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.user = action.payload;
-                state.ROLE = action.payload.usuario.role;
+                state.ROLE = action.payload.usuario.rol;
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;

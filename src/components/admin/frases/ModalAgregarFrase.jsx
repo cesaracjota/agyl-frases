@@ -20,6 +20,7 @@ import {
 import { VscAdd } from 'react-icons/vsc';
 import { useDispatch } from 'react-redux';
 import { createFrase } from '../../../features/frases/fraseSlice';
+import ModalAgregarCategoria from '../categorias/ModalAgregarCategoria';
 
 export const ModalAgregarFrase = ({ categorias }) => {
   const dispatch = useDispatch();
@@ -83,19 +84,22 @@ export const ModalAgregarFrase = ({ categorias }) => {
                   onChange={(e) => setIndice({ ...indice, autor: e.target.value })}
                 />
               </FormControl>
-              <FormControl isRequired>
-                <FormLabel>CATEGORIAS</FormLabel>
-                <Select 
-                  placeholder="SELECCIONE UNA CATEGORIA" 
-                  onChange={(e) => setIndice({ ...indice, categoria: e.target.value })}
-                >
-                  { categorias.map((category) => (
-                    <option key={category._id} value={category._id}>
-                      {category.nombre}
-                    </option>
-                  ))}
-                </Select>
-              </FormControl>
+                <FormControl isRequired>
+                  <FormLabel>CATEGORIAS</FormLabel>
+              <Stack direction="row" justifyContent="space-between" w="full">
+                  <Select 
+                    placeholder="SELECCIONE UNA CATEGORIA" 
+                    onChange={(e) => setIndice({ ...indice, categoria: e.target.value })}
+                  >
+                    { categorias.map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.nombre}
+                      </option>
+                    ))}
+                  </Select>
+                <ModalAgregarCategoria />
+              </Stack>
+                </FormControl>
             </Stack>
           </ModalBody>
           <ModalFooter>

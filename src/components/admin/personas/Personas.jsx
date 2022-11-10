@@ -1,6 +1,16 @@
-import React, { useEffect } from 'react'
-import { Badge, Box, HStack, Icon,IconButton,Stack,Text, useColorModeValue } from '@chakra-ui/react'
-import Moment from 'moment';
+import React, { useEffect } from 'react';
+import {
+    Avatar,
+    Badge, 
+    Box,
+    HStack, 
+    Icon,
+    IconButton,
+    Stack,
+    Text, 
+    useColorModeValue
+} from '@chakra-ui/react';
+// import Moment from 'moment';
 import { MdDelete, MdFilterList } from 'react-icons/md';
 import { CgExport } from 'react-icons/cg';
 import DataTable, { createTheme } from 'react-data-table-component';
@@ -8,17 +18,17 @@ import DataTableExtensions from 'react-data-table-component-extensions';
 import 'react-data-table-component-extensions/dist/index.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getCategories, reset } from '../../../features/categorias/categoriaSlice';
-import ModalAgregarCategoria from './ModalAgregarCategoria';
-import ModalEditarCategoria from './ModalEditarCategoria';
-import ModalDetallesCategoria from './ModalDetallesCategoria';
+import { getAllPersonas, reset } from '../../../features/personas/personaSlice';
 import { ToastChakra } from '../../../helpers/toast';
-import { AlertEliminar } from './AlertEliminar';
 import { FiChevronLeft, FiChevronRight, FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import { SpinnerComponent } from '../../../helpers/spinner';
 import { customStyles } from '../../../helpers/customStyles';
+import { ModalAgregarPersona } from './ModalAgregarPersona';
+import { ModalDetallesPersona } from './ModalDetallesPersona';
+import { ModalEditarPersona } from './ModalEditarPersona';
+import { AlertEliminarPersona } from './AlertEliminarPersona';
 
-const Categorias = () => {
+const Personas = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -27,9 +37,10 @@ const Categorias = () => {
 
     const { user } = useSelector((state) => state.auth);
 
-    const { categorias, isLoading, isError, message } = useSelector((state) => state.categorias);
+    const { personas, isLoading, isError, message } = useSelector((state) => state.personas);
 
     useEffect(() => {
+
         if(isError) {
             ToastChakra('Error', message, 'error', 1000);
             console.log(message);
@@ -37,11 +48,9 @@ const Categorias = () => {
 
         if (!user) {
             navigate("/login");
-        } else if (!user.token) {
-            navigate("/login");
         }
 
-        dispatch(getCategories())
+        dispatch(getAllPersonas())
 
         return () => {
             dispatch(reset())
@@ -51,11 +60,23 @@ const Categorias = () => {
 
     const columns = [
         {
-            name: 'ID',
-            selector: row => row._id,
-            sortable: true,
-            cellExport: row => row._id,
+            name: '🧑‍💻',
+            cell: (row) => (
+                <Avatar 
+                    size="sm" 
+                    name={row.nombre} 
+                    src={row.avatar}
+                    fontWeight="bold"
+                    fontSize="sm"
+                    color="white"
+                />
+            ),
+            ignoreRowClick: true,
+            allowOverflow: true,
+            button: true,
+            cellExport: row => row.avatar,
             resizable: true,
+            width : '100px'
         },
         {
             name: 'NOMBRE',
@@ -65,59 +86,53 @@ const Categorias = () => {
             resizable: true
         },
         {
-            name: 'ESTADO',
-            selector: row => { return row.estado === true ? 'ACTIVO' : 'INACTIVO' },
+            name: 'CORREO',
+            selector: row => row.correo,
             sortable: true,
-            cellExport: row => row.estado === true ? 'ACTIVO' : 'INACTIVO',
+            cellExport: row => row.correo,
+            resizable: true
+        },
+        {
+            name: 'ROL',
+            selector: row => row.rol === 'ADMIN_ROLE' ? 'ADMINISTRADOR' : 'USUARIO',
+            sortable: true,
+            cellExport: row => row.estado,
             center: true,
             cell: row => (
                 <div>
                     <Badge 
-                        colorScheme={row.estado === true ? 'green' : 'red'}
+                        bg={row.rol === 'ADMIN_ROLE' ? 'messenger.600' : 'red.600'}
                         variant="solid"
                         w={24}
                         textAlign="center"
-                        py={1.5}
+                        py={2}
                         rounded="full"
+                        color="white"
                     >
-                        {row.estado === true ? 'ACTIVO' : 'INACTIVO'}
+                        {row.rol === 'ADMIN_ROLE' ? 'ADMIN' : 'USER'}
                     </Badge>
                 </div>
             )
         },
-        {
-            name: 'FECHA CREACIÓN',
-            selector: row => Moment(row.createdAt).format('DD/MM/YY hh:mm:ss A'),
-            sortable: true,
-            cellExport: row => Moment(row.createdAt).format('DD/MM/YY hh:mm:ss A'),
-            resizable: true,
-        },
-        {
-            name: 'FECHA ACTUALIZACIÓN',
-            selector: row => Moment(row.updatedAt).format('DD/MM/YY hh:mm:ss A'),
-            sortable: true,
-            cellExport: row => Moment(row.updatedAt).format('DD/MM/YY hh:mm:ss A'),
-            resizable: true,
-        },
+        
         {
             name: 'ACCIONES',
-            sortable: true,
             export: false,
             center: true,
             cell : row => (
                 <div>
-                    <ModalDetallesCategoria categoria={row}/>
-                    <ModalEditarCategoria row={row} />
-                    <AlertEliminar row={row} />
+                    <ModalDetallesPersona persona={row}/>
+                    <ModalEditarPersona row={row} />
+                    <AlertEliminarPersona row={row} />
                 </div>
             ),
-            width : '180px' 
+            width : '220px'
         }
     ]
 
     const tableData = {
         columns: columns,
-        data: categorias,
+        data: personas,
     }
 
     createTheme('solarized', {
@@ -157,7 +172,7 @@ const Categorias = () => {
             >
                     <Stack spacing={4} direction="row" justifyContent="space-between" p={4}>
                         <HStack spacing={4} direction="row">
-                            <ModalAgregarCategoria />
+                            <ModalAgregarPersona />
                             <IconButton colorScheme="red" _dark={{ bg: "red.600", color: "white", _hover: { bg: "red.700" }}} aria-label='Eliminar' icon={<Icon as={MdDelete} fontSize="2xl" />} variant="solid" rounded="full" />
                         </HStack>
                         <HStack spacing={4} direction="row">
@@ -213,4 +228,4 @@ const Categorias = () => {
     )
 }
 
-export default Categorias;
+export default Personas;
