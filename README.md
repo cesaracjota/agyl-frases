@@ -10,8 +10,6 @@
 
 [![Screen Preview](./preview3.png)](./preview3.png)
 
-[![Screen Preview](./preview3.1.png)](./preview3.1.png)
-
 [![Screen Preview](./preview4.png)](./preview4.png)
 
 [![Screen Preview](./preview5.png)](./preview5.png)
