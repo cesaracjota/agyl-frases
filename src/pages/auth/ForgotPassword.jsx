@@ -13,10 +13,15 @@ import {
     HStack,
     Flex,
     Image,
+    InputGroup,
+    InputLeftElement,
 } from '@chakra-ui/react';
 import {  useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { ToastChakra } from '../../helpers/toast';
+import bgCardAuth from '../../assets/img/bgAuth.webp';
+import bgAuth from '../../assets/img/lineas-fondo-auth.png';
+import { FaRegUser } from 'react-icons/fa';
 
 const ForgotPasswordPage = () => {
 
@@ -48,14 +53,14 @@ const ForgotPasswordPage = () => {
             </Stack>
         </Center>
     ) : (
-        <HStack spacing={2} w={'full'} h={'100vh'} bgImage="https://204.199.168.56/assets/layout/images/lineas-fondo-login.png" px={{ base: 4, lg: 28}} py={{base: 14, lg: 20}}>
+        <HStack spacing={2} w={'full'} h={'100vh'} bgImage={bgAuth} px={{ base: 4, lg: 28}} py={{base: 14, lg: 20}}>
             <Flex w="full" h="full" display={{ base: 'none', lg: 'flex'}}>
                 <Box justifyContent="center" w="full">
                         <Image
                             objectFit={'cover'}
                             w={'full'}
                             h={'full'}
-                            src="https://204.199.168.56/assets/layout/images/pasante1.webp"
+                            src={bgCardAuth}
                             rounded={'lg'}
                         />
                 </Box>
@@ -67,16 +72,21 @@ const ForgotPasswordPage = () => {
                         <Heading textAlign={'center'} fontSize="xl" fontWeight="bold" mt={2}>
                             Sistema de Administración de una API
                         </Heading>
-                        <Heading textAlign={'center'} fontWeight="hairline" fontSize="md" mt={2}>
-                            Recuperar Contraseña
-                        </Heading>
                         <FormControl id="email">
-                            <FormLabel mt={4}>Email Address</FormLabel>
-                            <Input
-                                type="email"
-                                placeholder='Ingrese su correo electrónico'
-                                onChange={(e) => setCorreo(e.target.value)}
-                            />
+                            <FormLabel mt={4}>Correo Electrónico</FormLabel>
+                            <InputGroup>
+                                <InputLeftElement
+                                    pointerEvents="none"
+                                    color="gray.500"
+                                    _dark={{ color: 'gray.400' }}
+                                    children={ <FaRegUser color="gray.500" fontSize={18} /> }
+                                />
+                                <Input
+                                    type="email"
+                                    placeholder='Ingrese su correo electrónico'
+                                    onChange={(e) => setCorreo(e.target.value)}
+                                />
+                            </InputGroup>
                         </FormControl>
                         <FormControl>
                             <Button
